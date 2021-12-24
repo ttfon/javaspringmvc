@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -63,8 +64,8 @@ public class apiCartController {
         }
        return countCart(cart);
     }
-    @PostMapping("/api/pay/{id}")
-    public HttpStatus pay(HttpSession session, @PathVariable(value="id")int id)
+    @PostMapping("/api/chuyenxe/pay/{id}")
+    public HttpStatus pay(HttpSession session,@PathVariable(value="id")int id)
     {
         if(this.donTourService.addDonCX((Map<Integer, CartXe>) session.getAttribute("cart"),id)==true)
         {
@@ -75,18 +76,9 @@ public class apiCartController {
             
         return HttpStatus.BAD_REQUEST;
     }
-    @PostMapping("/v2/gateway/api/create/{id}")
-    public HttpStatus paymomo(HttpSession session, @PathVariable(value="id")int id)
-    {
-         if(this.donTourService.addDonCX((Map<Integer, CartXe>) session.getAttribute("cart"),id)==true)
-        {
-            //session.removeAttribute("cart");
-            return HttpStatus.OK;
-            
-        }
-                 return HttpStatus.BAD_REQUEST;
-
-    }
+   
+    
+   
             
             
             

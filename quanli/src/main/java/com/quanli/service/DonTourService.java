@@ -22,4 +22,6 @@ public interface DonTourService {
     DonTour getDTById(int id);
     void update(DonTour donphong);
     boolean addDonCX(Map<Integer,CartXe> cart,int id);
+    List<DonTour> getDoanhThuTheoThang(int thang);
+   
 }

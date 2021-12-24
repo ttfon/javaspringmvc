@@ -12,7 +12,7 @@
 
 <div class="container" style="height: 1000px;">
     
-    <h1>Quản lí người dùng</h1>
+    <h1>Quản lí tài xế</h1>
       <br><br>
     <table class="table table-bordered" >
         <thead>

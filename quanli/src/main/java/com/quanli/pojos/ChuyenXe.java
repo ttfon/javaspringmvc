@@ -33,11 +33,9 @@ public class ChuyenXe implements Serializable {
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     private int idCX;
-    @NotNull(message = "{notNull.Err}")
     private String tenCX;
     private String mota;
     private String hinhanh;
-    @NotNull(message = "{notNull.Err}")
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     @Temporal(TemporalType.DATE)
     private Date ngaydi;
@@ -48,7 +46,6 @@ public class ChuyenXe implements Serializable {
     @ManyToOne
     @JoinColumn(name="idTX")
     private User user;
-    @NotNull(message = "{notNull.Err}")
     @Transient
     private MultipartFile file;
      

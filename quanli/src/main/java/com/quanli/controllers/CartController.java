@@ -290,8 +290,9 @@ public class CartController {
     {
         return "phuongthucthanhtoantour";
     }
+    
     @RequestMapping("/chuyenxe/cart")
-    public String cartCX(Model model, HttpSession session) throws NoSuchAlgorithmException
+    public String cartCX(Model model, HttpSession session) throws NoSuchAlgorithmException, Exception
     {
         Map<Integer, CartXe> cart = (Map<Integer, CartXe>) session.getAttribute("cart");
         if(cart !=null)
@@ -304,7 +305,9 @@ public class CartController {
         model.addAttribute("requestId", uuid );
        model.addAttribute("secretKey","WRKLP6rgXmNxwPGCpKj4oZ9UXMgt4llG");
        model.addAttribute("accessKey","UhmXBQrWPA8dfho6");
-        return "cartCX";
+       String rawsignature = "accessKey=UhmXBQrWPA8dfho6&amount=300000&extraData=&ipnUrl=https://momo.vn&orderId=1&orderInfo=toantran&partnerCode=MOMOBWEX20210917&redirectUrl=https://momo.vn&requestId=48446a13-951b-43fd-be49-b164de2cdfca&requestType=captureWallet";
+       
+       return "cartCX";
     }
 
    

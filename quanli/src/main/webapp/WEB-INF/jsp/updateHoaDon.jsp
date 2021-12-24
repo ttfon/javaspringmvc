@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix ="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="container">
     <c:url value="/admin/hoadon/update" var ="action"/>
     <form:form method="post" modelAttribute="hoadon" action="${action}">
@@ -62,7 +63,12 @@
         <div class="form-group">
            <input type="submit" class="btn btn-success" cssClass="form-control" value="submit"/>
            </div> 
-          <a class="btn btn-secondary" href="<c:url value="/admin/hoadon"/>">Quay lại</a>
+         
     </form:form>
-    
+     <sec:authorize access="hasRole('ROLE_NV')">
+                    <a class="btn btn-secondary" href="<c:url value="/nhanvien/hoadon"/>">Quay lại1</a>
+      </sec:authorize>
+                      <sec:authorize access="hasRole('ROLE_ADMIN')">
+                     <a class="btn btn-secondary" href="<c:url value="/admin/hoadon"/>">Quay lại</a>
+        </sec:authorize>
 </div>

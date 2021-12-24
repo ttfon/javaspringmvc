@@ -55,9 +55,9 @@ public class ChuyenXeRepositoryImpl implements ChuyenXeRepository{
     }
 
     @Override
-    public List<ChuyenXe> getChuyenXediByTP(String string) {
+    public List<ChuyenXe> getChuyenXediByTP(int string) {
          Session session = this.sessionFactoryBean.getObject().getCurrentSession();
-          Query q =session.createQuery("From ChuyenXe cx Where cx.diemdi like CONCAT('%', :lp, '%')");
+          Query q =session.createQuery("From ChuyenXe cx Where cx.user.id =:lp");
           q.setParameter("lp", string);
           return q.getResultList();
     }

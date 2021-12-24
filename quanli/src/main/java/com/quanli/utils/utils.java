@@ -8,6 +8,9 @@ package com.quanli.utils;
 import com.quanli.pojos.Cart;
 import com.quanli.pojos.CartXe;
 import java.util.Map;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import org.apache.commons.codec.binary.Hex;
 
 /**
  *
@@ -37,7 +40,8 @@ public class utils {
         return s;
         
     }
-   
+  
+  
 
    
 }

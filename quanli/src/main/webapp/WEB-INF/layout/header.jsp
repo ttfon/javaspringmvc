@@ -38,6 +38,12 @@
                      <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <a class="dropdown-item" href=" <c:url value="/admin/thongke"/>">Quản lí</a>     
                      </sec:authorize>
+                        <sec:authorize access="hasRole('ROLE_NV')">
+                        <a class="dropdown-item" href=" <c:url value="/nhanvien/index"/>">Nhân Viên</a>     
+                     </sec:authorize>
+                         <sec:authorize access="hasRole('ROLE_TX')">
+                        <a class="dropdown-item" href=" <c:url value="/taixe/info/${currentUser.id}"/>">Tài Xế</a>     
+                     </sec:authorize>
                         <a class="dropdown-item" href=" <c:url value="/profile/${pageContext.request.userPrincipal.name}"/>">Thông tin</a>    
                         <a class="dropdown-item" href="<c:url value="/logout"/>">Logout</a>
                   </div>

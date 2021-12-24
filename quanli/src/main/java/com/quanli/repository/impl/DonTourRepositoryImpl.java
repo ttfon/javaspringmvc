@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author AD
  */
 @Repository
-@Transactional()
+@Transactional(propagation = Propagation.REQUIRED)
 public class DonTourRepositoryImpl implements DonTourRepository{
 
       @Autowired
@@ -114,5 +114,17 @@ public class DonTourRepositoryImpl implements DonTourRepository{
         }
         return true;
     }
+
+    @Override
+    public List<DonTour> getDoanhThuTheoThang(int thang) {
+         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+       String query = "select dp.ngaytao, sum(dp.tongtien) from DonTour as dp where month(dp.ngaytao)=:thang group by dp.ngaytao";
+              
+        Query q = session.createQuery(query);
+        q.setParameter("thang", thang);
+        return q.getResultList();
+    }
+
+   
     
 }

@@ -60,5 +60,12 @@ public class DonTourServiceImpl implements DonTourService{
         else 
             return false;
     }
+
+    @Override
+    public List<DonTour> getDoanhThuTheoThang(int thang) {
+       return this.donTourRepository.getDoanhThuTheoThang(thang);
+    }
+
+   
     
 }

@@ -8,6 +8,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <div class="container">
     <table class="table">
@@ -21,20 +23,20 @@
     <tbody>
         <c:forEach items="${hoadon}" var="ct">
       <tr>
-        <td>${ct.tour.nametour}</td>
-        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${ct.tour.price}"/> VND</td>
+        <td>${ct.chuyenxe.tenCX}</td>
+        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${ct.chuyenxe.giaghe}"/> VND</td>
         <td>${ct.soluong}</td>
       </tr>
       
         </c:forEach>
       <tr>
-          <th></th>
+          <th>Ngày đặt</th>
         <th>Tên người đặt</th>
         <th>Tổng cộng</th>
       </tr>
        <c:forEach items="${hoadon}" var="ct">
        <tr>
-           <td></td>
+           <td>${ct.dontour.ngaytao}</td>
         <td>${ct.dontour.hoten}</td>
         <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${ct.dontour.tongtien}"/> VND</td>
        
@@ -43,5 +45,11 @@
      
     </tbody>
   </table>
-       <a class="btn btn-secondary" href="<c:url value="/admin/hoadon"/>">Quay lại</a>
+      
+        <sec:authorize access="hasRole('ROLE_NV')">
+                      <a class="btn btn-secondary" href="<c:url value="/nhanvien/hoadon"/>">Quay lại</a>
+        </sec:authorize>
+                      <sec:authorize access="hasRole('ROLE_ADMIN')">
+                     <a class="btn btn-secondary" href="<c:url value="/admin/hoadon"/>">Quay lại</a>
+        </sec:authorize>
 </div>

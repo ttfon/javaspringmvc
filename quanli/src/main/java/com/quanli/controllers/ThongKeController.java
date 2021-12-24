@@ -25,9 +25,13 @@ public class ThongKeController {
     private DonTourService donTourService;
     @RequestMapping("/admin/thongke")
     public String showthongke(Model model){
-        model.addAttribute("donphong", this.donPhongService.getDonPhong());
-         model.addAttribute("donphong2", this.donPhongService.getDoanhThuTheoKS());
+        
          model.addAttribute("dontour", this.donTourService.getDoanhThu());
+         for(int i = 1 ; i<13; i++)
+         {
+              model.addAttribute("doanhthuthang"+i,this.donTourService.getDoanhThuTheoThang(i));
+         }
+        
         return "thongke";
     }
     

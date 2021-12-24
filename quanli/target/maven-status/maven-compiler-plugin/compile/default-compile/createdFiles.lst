@@ -12,6 +12,7 @@ com\quanli\pojos\DanhGia.class
 com\quanli\service\CTDonPhongService.class
 com\quanli\service\DonTourService.class
 com\quanli\service\PaypalService.class
+com\quanli\formatter\DanhGiaCXFormatter.class
 com\quanli\service\LoaiPhongService.class
 com\quanli\service\Impl\PhongServiceImpl.class
 com\quanli\service\DonPhongService.class

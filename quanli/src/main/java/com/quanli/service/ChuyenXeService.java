@@ -18,7 +18,7 @@ public interface ChuyenXeService {
      List<ChuyenXe> getKS();
     void deleteCX(int id);
     List<ChuyenXe> getChuyenXeByTP(String tp);
-    List<ChuyenXe> getChuyenXediByTP(String tp);
+    List<ChuyenXe> getChuyenXediByTP(int tp);
     ChuyenXe getChuyenXeById(int id);
     void updateCX(ChuyenXe chuyenxe);
 }

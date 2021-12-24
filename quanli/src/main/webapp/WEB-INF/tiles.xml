@@ -242,4 +242,24 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="contentleft" value ="/WEB-INF/layout/contentleft.jsp"/>
         <put-attribute name="content" value="/WEB-INF/jsp/addDanhGia.jsp" />
     </definition>
+    <definition name="NhanVienIndex" extends="baseLayout">
+        <put-attribute name="title" value="Nhân Viên" />
+        <put-attribute name="contentleft" value ="/WEB-INF/layout/contentleft.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/NhanVienIndex.jsp" />
+    </definition>
+    <definition name="NhanVienCart" extends="baseLayout">
+        <put-attribute name="title" value="Nhân Viên" />
+        <put-attribute name="contentleft" value ="/WEB-INF/layout/contentleft.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/NhanVienCart.jsp" />
+    </definition>
+    <definition name="HoaDonNV" extends="baseLayout">
+        <put-attribute name="title" value="Nhân Viên" />
+        <put-attribute name="contentleft" value ="/WEB-INF/layout/contentleft.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/HoaDonNV.jsp" />
+    </definition>
+    <definition name="TaiXeInfo" extends="baseLayout">
+        <put-attribute name="title" value="Nhân Viên" />
+        <put-attribute name="contentleft" value ="/WEB-INF/layout/contentleft.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/TaiXeInfo.jsp" />
+    </definition>
 </tiles-definitions>

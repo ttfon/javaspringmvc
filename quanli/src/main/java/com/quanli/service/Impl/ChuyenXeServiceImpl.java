@@ -58,7 +58,7 @@ public class ChuyenXeServiceImpl implements ChuyenXeService{
     }
 
     @Override
-    public List<ChuyenXe> getChuyenXediByTP(String string) {
+    public List<ChuyenXe> getChuyenXediByTP(int string) {
         return this.getChuyenXediByTP(string);
     }
 

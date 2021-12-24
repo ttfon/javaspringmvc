@@ -1,5 +1,7 @@
 package com.mservice.shared.utils;
 
+import com.google.gson.Gson;
+import com.mservice.allinone.models.PayGateResponse;
 import com.mservice.shared.sharedmodels.HttpRequest;
 import com.mservice.shared.sharedmodels.HttpResponse;
 import okhttp3.*;
@@ -10,7 +12,8 @@ import java.io.IOException;
 public class Execute {
 
     OkHttpClient client = new OkHttpClient();
-
+    
+    public static String chuoi= "";
     public HttpResponse sendToMoMo(String endpoint, String payload) {
 
         try {
@@ -23,7 +26,7 @@ public class Execute {
 
             Response result = client.newCall(request).execute();
             HttpResponse response = new HttpResponse(result.code(), result.body().string(), result.headers());
-
+            chuoi = response.toString();
             LogUtils.info("[HttpResponseFromMoMo] " + response.toString());
 
             return response;

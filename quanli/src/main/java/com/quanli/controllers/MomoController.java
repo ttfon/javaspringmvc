@@ -16,6 +16,7 @@ import com.mservice.allinone.processor.allinone.PaymentResult;
 import com.mservice.allinone.processor.allinone.QueryStatusTransaction;
 import com.mservice.shared.sharedmodels.Environment;
 import com.mservice.shared.sharedmodels.HttpResponse;
+import com.mservice.shared.utils.Execute;
 import com.mservice.shared.utils.LogUtils;
 import com.quanli.pojos.CartXe;
 import com.quanli.utils.utils;
@@ -107,11 +108,14 @@ public class MomoController {
 
 //        Transaction Query - Kiểm tra trạng thái giao dịch
         QueryStatusTransactionResponse queryStatusTransactionResponse = QueryStatusTransaction.process(environment, orderId, requestId);
-
+       
+        
 //      Process Payment Result - Xử lý kết quả thanh toán
         PayGateResponse payGateResponse = PaymentResult.process(environment,new PayGateResponse());
+        Gson gson = new Gson(); // Or use new GsonBuilder().create();
+        CaptureMoMoResponse target2 = gson.fromJson(captureMoMoResponse.getJsonObject(), CaptureMoMoResponse.class); 
         
-        return "redirect:/";
+        return "redirect:"+target2.getPayUrl();
 
     }
    

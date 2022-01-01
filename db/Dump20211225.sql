@@ -32,9 +32,10 @@ CREATE TABLE `chuyenxe` (
   `diemden` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `giaghe` decimal(10,0) NOT NULL,
   `soluong` int NOT NULL,
-  `idTX` int NOT NULL,
+  `idTX` int DEFAULT NULL,
   PRIMARY KEY (`idCX`),
-  KEY `fk_cx_tx_idx` (`idTX`)
+  KEY `fk_cx_tx_idx` (`idTX`),
+  CONSTRAINT `fk_cx_user` FOREIGN KEY (`idTX`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -44,7 +45,7 @@ CREATE TABLE `chuyenxe` (
 
 LOCK TABLES `chuyenxe` WRITE;
 /*!40000 ALTER TABLE `chuyenxe` DISABLE KEYS */;
-INSERT INTO `chuyenxe` VALUES (6,'aaa','sdsdsd','https://res.cloudinary.com/ttfon1432/image/upload/v1638855794/klzlqrohzbnll6w5iysr.jpg','2021-01-10','Hồ Chí Minh','Hà Nội',300000,6,16),(7,'jjhj','hhhhh','https://res.cloudinary.com/ttfon1432/image/upload/v1638861820/vkuoosortdy12ps3wist.png','2021-01-10','Hồ Chí Minh','Hồ Chí Minh',300000,17,19),(8,'47c44444','abc','https://res.cloudinary.com/ttfon1432/image/upload/v1639138830/obyvuhp5eymoz23n4rhz.jpg','2021-01-11','Hồ Chí Minh','Nha Trang',300000,10,16),(9,'51C12345','ewqe','https://res.cloudinary.com/ttfon1432/image/upload/v1639140427/loioruxhtixgrrf2unme.jpg','2021-01-11','Hồ Chí Minh','Đà Lạt',300000,0,19),(11,'51C123333','adada','https://res.cloudinary.com/ttfon1432/image/upload/v1639725674/qq77iclfqaqhy7rpby2b.png','2021-01-18','Hồ Chí Minh','Đà Nẵng',400000,20,16);
+INSERT INTO `chuyenxe` VALUES (1,'14C32323','dadadfd','https://tintucxeco.net/wp-content/uploads/2019/05/xe-khach-thai-minh.jpg','2021-01-18','Hồ Chí Minh','Đà Nẵng',400000,18,NULL),(7,'jjhj','hhhhh','https://dixere.vn/wp-content/uploads/2019/08/xe-khach-mai-linh-176700_result.jpg','2021-01-10','Hồ Chí Minh','Hồ Chí Minh',300000,15,19),(8,'47c44444','abc','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQElwPRYI0QfHc6V4fCBL6dWlZ13w1XaityewYBmI2Zl-DAhsZXIj5jhiRlsfz2XGxj2G8&usqp=CAU','2021-01-11','Hồ Chí Minh','Nha Trang',300000,9,16),(9,'51C12345','ewqe','https://kenhhomestay.com/wp-content/uploads/2019/12/xe-khach-sai-gon-soc-trang-5.jpg','2021-01-11','Hồ Chí Minh','Đà Lạt',300000,0,19),(11,'51C123333','adada','https://kenhhomestay.com/wp-content/uploads/2019/11/xe-khach-ca-mau-5.jpg','2021-01-18','Hồ Chí Minh','Đà Nẵng',400000,20,16);
 /*!40000 ALTER TABLE `chuyenxe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +77,7 @@ CREATE TABLE `ctdonphong` (
 
 LOCK TABLES `ctdonphong` WRITE;
 /*!40000 ALTER TABLE `ctdonphong` DISABLE KEYS */;
-INSERT INTO `ctdonphong` VALUES (19,51,16,1,1000001,_binary '1'),(23,69,6,1,2000000,_binary '1'),(24,70,9,1,2000000,_binary '1'),(25,71,11,1,500000,_binary '1');
+INSERT INTO `ctdonphong` VALUES (19,51,16,1,1000001,_binary '1'),(25,71,11,1,500000,_binary '1');
 /*!40000 ALTER TABLE `ctdonphong` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,15 +91,14 @@ DROP TABLE IF EXISTS `ctdontour`;
 CREATE TABLE `ctdontour` (
   `id` int NOT NULL AUTO_INCREMENT,
   `iddontour` int NOT NULL,
-  `idtour` int NOT NULL,
+  `idtour` int DEFAULT NULL,
   `soluong` int NOT NULL,
   `gia` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_ctdontour_dontour_idx` (`iddontour`),
-  KEY `fk_ctdontour_tour_idx` (`idtour`),
-  CONSTRAINT `fk_ctdontour_dontour` FOREIGN KEY (`iddontour`) REFERENCES `dontour` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_ctdontour_tour` FOREIGN KEY (`idtour`) REFERENCES `tour` (`idtour`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+  KEY `fk_ctdt_idchuyenxe_idx` (`idtour`),
+  CONSTRAINT `fk_ctdontour_dontour` FOREIGN KEY (`iddontour`) REFERENCES `dontour` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +107,7 @@ CREATE TABLE `ctdontour` (
 
 LOCK TABLES `ctdontour` WRITE;
 /*!40000 ALTER TABLE `ctdontour` DISABLE KEYS */;
-INSERT INTO `ctdontour` VALUES (19,27,1,1,300000),(20,28,7,1,300000),(21,29,7,1,300000),(22,30,7,1,300000);
+INSERT INTO `ctdontour` VALUES (19,27,1,1,300000),(20,28,7,1,300000),(57,65,8,1,300000),(59,67,6,1,300000),(60,68,7,1,300000),(61,69,1,1,400000),(62,70,1,1,400000);
 /*!40000 ALTER TABLE `ctdontour` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,15 +121,15 @@ DROP TABLE IF EXISTS `danhgia`;
 CREATE TABLE `danhgia` (
   `id` int NOT NULL AUTO_INCREMENT,
   `noidung` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `idCX` int NOT NULL,
-  `idU` int NOT NULL,
+  `idCX` int DEFAULT NULL,
+  `idU` int DEFAULT NULL,
   `sao` int NOT NULL,
   `ngaytao` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_dg_user_idx` (`idU`),
-  KEY `fk_dg_cx_idx` (`idCX`),
-  CONSTRAINT `fk_dg_cx` FOREIGN KEY (`idCX`) REFERENCES `chuyenxe` (`idCX`),
-  CONSTRAINT `fk_dg_user` FOREIGN KEY (`idU`) REFERENCES `user` (`id`)
+  KEY `fk_user_dg_idx` (`idU`),
+  KEY `fk_cx_dg_idx` (`idCX`),
+  CONSTRAINT `fk_cx_dg` FOREIGN KEY (`idCX`) REFERENCES `chuyenxe` (`idCX`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `fk_user_dg` FOREIGN KEY (`idU`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -139,7 +139,7 @@ CREATE TABLE `danhgia` (
 
 LOCK TABLES `danhgia` WRITE;
 /*!40000 ALTER TABLE `danhgia` DISABLE KEYS */;
-INSERT INTO `danhgia` VALUES (1,'bac',7,16,3,'2021-12-18'),(2,'nhập nội dung ở đây',7,38,1,'2021-12-18'),(3,'nhập nội dung ở đây',7,38,1,'2021-12-18'),(4,'nhập nội dung ở đây',7,38,1,'2021-12-18');
+INSERT INTO `danhgia` VALUES (1,'xe chat luong',1,NULL,5,'2021-12-25');
 /*!40000 ALTER TABLE `danhgia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +174,7 @@ CREATE TABLE `donphong` (
 
 LOCK TABLES `donphong` WRITE;
 /*!40000 ALTER TABLE `donphong` DISABLE KEYS */;
-INSERT INTO `donphong` VALUES (51,NULL,'2021-09-18','tran huy toan','ttfon111@gmail.com','0941165623','2021-01-18','2021-01-20',2000002,'offline','chưa thanh toán'),(55,20,'2021-09-23','tran huy toan','e1851010138toan@ou.edu.vn','0941193166','2021-01-25','2021-01-30',2500000,'paypal','đã thanh toán'),(69,38,'2021-10-01','admin','admin@quanli.com','0999999999','2021-01-02','2021-01-05',6000000,'offline',NULL),(70,38,'2021-10-23','admin','admin@quanli.com','0999999999','2021-01-23','2021-01-27',8000000,'paypal','đã thanh toán'),(71,NULL,'2021-11-12','','1851010138toan@ou.edu.vn','0941193169','2021-01-19','2021-01-20',500000,'offline',NULL);
+INSERT INTO `donphong` VALUES (51,NULL,'2021-09-18','tran huy toan','ttfon111@gmail.com','0941165623','2021-01-18','2021-01-20',2000002,'offline','chưa thanh toán'),(55,20,'2021-09-23','tran huy toan','e1851010138toan@ou.edu.vn','0941193166','2021-01-25','2021-01-30',2500000,'paypal','đã thanh toán'),(71,NULL,'2021-11-12','','1851010138toan@ou.edu.vn','0941193169','2021-01-19','2021-01-20',500000,'offline',NULL);
 /*!40000 ALTER TABLE `donphong` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +198,7 @@ CREATE TABLE `dontour` (
   PRIMARY KEY (`id`),
   KEY `fk_dontour_user_idx` (`iduser`),
   CONSTRAINT `fk_dontour_user` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +207,7 @@ CREATE TABLE `dontour` (
 
 LOCK TABLES `dontour` WRITE;
 /*!40000 ALTER TABLE `dontour` DISABLE KEYS */;
-INSERT INTO `dontour` VALUES (22,38,'admin','admin@quanli.com','0999999999',300000,'paypal','đã thanh toán','2021-10-23'),(26,NULL,'tran huy toan','1851010138toan@ou.edu.vn','0941193169',300000,'paypal','đã thanh toán','2021-11-12'),(27,NULL,'tran huy toan','1851010138toan@ou.edu.vn','0941193169',300000,'paypal','đã thanh toán','2021-11-12'),(28,16,NULL,NULL,NULL,300000,'offline','chưa thanh toán','2021-12-14'),(29,38,NULL,NULL,NULL,300000,'offline','chưa thanh toán','2021-12-16'),(30,38,NULL,NULL,NULL,300000,'offline','chưa thanh toán','2021-12-17');
+INSERT INTO `dontour` VALUES (26,NULL,'tran huy toan','1851010138toan@ou.edu.vn','0941193169',300000,'paypal','đã thanh toán','2021-11-12'),(27,NULL,'tran huy toan','1851010138toan@ou.edu.vn','0941193169',300000,'paypal','đã thanh toán','2021-11-12'),(28,16,NULL,NULL,NULL,300000,'offline','chưa thanh toán','2021-12-14'),(65,20,NULL,NULL,NULL,300000,'offline','chưa thanh toán','2021-12-21'),(67,20,'huytoan','huytoant@gmail.com','0944154784',300000,'offline','chÆ°a thanh toÃ¡n','2021-01-21'),(68,20,NULL,NULL,NULL,300000,'offline','chưa thanh toán','2021-12-21'),(69,19,NULL,NULL,NULL,400000,'offline','chưa thanh toán','2021-12-25'),(70,19,NULL,NULL,NULL,400000,'offline','chưa thanh toán','2021-12-25');
 /*!40000 ALTER TABLE `dontour` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,7 +291,7 @@ CREATE TABLE `phong` (
 
 LOCK TABLES `phong` WRITE;
 /*!40000 ALTER TABLE `phong` DISABLE KEYS */;
-INSERT INTO `phong` VALUES (1,'phong 1',500000,'1',1,2),(2,'phong 2',1000000,'1',2,2),(3,'phong 3',2000000,'1',3,2),(4,'phong 1',500000,'1',1,3),(5,'phong 2',1000000,'1',2,3),(6,'phong 3',2000000,'1',3,3),(7,'phong 1',500000,'1',1,4),(8,'phong 2',1000000,'1',2,4),(9,'phong 3',2000000,'1',3,4),(11,'phong 1',500000,'0',1,1),(15,'phong 4',1000000,'1',3,1),(16,'phong 4',1000001,'1',2,1),(18,'phong 404',125000,'1',6,1),(19,'phong 10',500000,'1',2,9);
+INSERT INTO `phong` VALUES (1,'phong 1',500000,'1',1,2),(2,'phong 2',1000000,'1',2,2),(3,'phong 3',2000000,'1',3,2),(4,'phong 1',500000,'1',1,3),(5,'phong 2',1000000,'1',2,3),(6,'phong 3',2000000,'1',3,3),(7,'phong 1',500000,'1',1,4),(8,'phong 2',1000000,'1',2,4),(9,'phong 3',2000000,'1',3,4),(11,'phong 1',500000,'0',1,1),(15,'phong 4',1000000,'0',3,1),(16,'phong 4',1000001,'1',2,1),(18,'phong 404',125000,'1',6,1),(19,'phong 10',500000,'1',2,9);
 /*!40000 ALTER TABLE `phong` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -370,7 +370,7 @@ CREATE TABLE `user` (
   `hinhanh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -379,7 +379,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (16,'ttfon1','$2a$10$Zd.l8A3srvJH0mBiA0OAoe4bosUb3e3UpNJMfhY0ZWYcW.v6JLY3G','ROLE_TX','adsd','0941193166','c1851010138toan@ou.edu.vn','2000-01-14','https://res.cloudinary.com/ttfon1432/image/upload/v1632296774/zniysinxqefnaenrv8cb.png'),(19,'ttfon2','$2a$10$M331P3oNVUxNLHQxsFRmdOQ9hJgPShlJzoGUDuDoRGvlSXiZy7X9O','ROLE_TX','Tráº§n Huy ToÃ n','0941193166','d1851010138toan@ou.edu.vn','2000-01-14','https://i1.wp.com/rookiepencil.xyz/wp-content/uploads/2021/04/demon-slayer-kimetsu-no-yaiba-movie-mugen-train-kyojuro-rengoku-1241212-1280x0-1.jpeg?resize=1140%2C641&ssl=1'),(20,'toan','$2a$10$F70D1unCEHWYVLiHslwAdeoGT2QVQ1zIerrv9k3NLHoQTWk4GzXqC','ROLE_NV','tran huy toan','0941193166','e1851010138toan@ou.edu.vn','2000-01-14','https://i1.wp.com/rookiepencil.xyz/wp-content/uploads/2021/04/demon-slayer-kimetsu-no-yaiba-movie-mugen-train-kyojuro-rengoku-1241212-1280x0-1.jpeg?resize=1140%2C641&ssl=1'),(38,'admin','$2a$10$vDU.Gqo040/mfsqhsU7ZO.ndXDP6Nmxg4V6r0i3dp/lvRWyhgT8e6','ROLE_ADMIN','admin','0111111111','admin@quanli.com','2000-01-14','https://i1.wp.com/rookiepencil.xyz/wp-content/uploads/2021/04/demon-slayer-kimetsu-no-yaiba-movie-mugen-train-kyojuro-rengoku-1241212-1280x0-1.jpeg?resize=1140%2C641&ssl=1');
+INSERT INTO `user` VALUES (16,'ttfon1','$2a$10$qbIRvL7FouSfqfFil0ZrlOjul7Ay95Ws9SI9YPrALR36Ekg3oBO.q','ROLE_TX','adsd','0941193166','c1851010138toan@ou.edu.vn','2000-01-14','https://res.cloudinary.com/ttfon1432/image/upload/v1632296774/zniysinxqefnaenrv8cb.png'),(19,'admin','$2a$10$9ssyRMl2YL4R8p/btUHTou5/T4bZ/6Lm0MSvjXBvQzfFR2G.DOooq','ROLE_ADMIN','tran huy toan','0941193169','huytoantran8111@gmail.com','2000-01-14',NULL),(20,'toan','$2a$10$1uXAzCUZgG8ulT4oy88ac./.U.5jqqQfXer5h4aSParfGb/5f.GG.','ROLE_NV','tran huy toan','0941193166','e1851010138toan@ou.edu.vn','2000-01-14','https://i1.wp.com/rookiepencil.xyz/wp-content/uploads/2021/04/demon-slayer-kimetsu-no-yaiba-movie-mugen-train-kyojuro-rengoku-1241212-1280x0-1.jpeg?resize=1140%2C641&ssl=1');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -392,4 +392,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-19 14:27:26
+-- Dump completed on 2021-12-25 14:45:07

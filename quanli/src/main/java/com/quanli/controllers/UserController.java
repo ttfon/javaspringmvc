@@ -119,12 +119,12 @@ public class UserController {
         model.addAttribute("user", this.userDetailsService.getUsers(username));
         return "updateprofile";
     }
-    @PostMapping("profile/update")
+    @PostMapping("/profile/update")
     public String updateUser(@ModelAttribute(name="user") User user)
     {
         
             this.userDetailsService.updateUserwAvatar(user);
-            return "redirect:/profile";
+            return "redirect:/";
       
     }
 }

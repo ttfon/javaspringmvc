@@ -44,7 +44,7 @@
                        <spring:url value="users/edit/${q.id}" var="edit"/>
                      <a class="btn btn-info" href="${profile}">Thông tin</a>
                      <a class="btn btn-primary" href="${edit}">Chỉnh sửa</a>
-                      <a class="btn btn-danger" href="${delete}">Xóa</a>
+                      <a class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa? ')" href="${delete}">Xóa</a>
                   </td>
             </tr>
         </c:forEach>

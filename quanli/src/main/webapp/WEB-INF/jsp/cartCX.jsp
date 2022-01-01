@@ -47,7 +47,13 @@
                   </tr>
                 </tbody>
             </table>
-                  <a type="button"  class="btn btn-danger" onclick="offlinePay()">Thanh Toán<a/>
+                      <c:if test="${currentUser.id == null}">
+                          <div class="alert alert-danger">
+                              Hãy đăng nhập để thanh toán
+                          </div>
+                      </c:if>
+                  <a type="button"  class="btn btn-danger" onclick="offlinePay()" style="color: white;">Thanh Toán<a/>
+                      <a type="button"  class="btn btn-danger" href="<c:url value="/momo/pay"/>" style="color: white;">Thanh Toán Bằng Momo<a/>
                    <sec:authorize access="hasRole('ROLE_NV')">
                        <a type="button"  href="<c:url value="/nhanvien/pay"/>" class="btn btn-danger" >Nhân Viên Đặt Xe<a/>    
                      </sec:authorize>
@@ -73,7 +79,7 @@
             return res.json();
         }).then(function(code){
             console.info(code);
-            location.reload();
+            window.location="/quanli/lichsu/?id=${currentUser.id}";
         });
     }
     

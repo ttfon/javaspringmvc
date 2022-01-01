@@ -71,5 +71,10 @@ public class ChuyenXeServiceImpl implements ChuyenXeService{
     public void updateCX(ChuyenXe cx) {
         this.chuyenXeRepository.updateCX(cx);
     }
+
+    @Override
+    public List<ChuyenXe> getKSTop4(int page) {
+        return this.chuyenXeRepository.getKSTop4(page);
+    }
     
 }

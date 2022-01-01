@@ -41,10 +41,28 @@
   </a>
 </div>
 <div class="container">
-    
+       <div class="col-md-20" >
+        <br>
+        <a href="<c:url value="/chuyenxe"/>" ><h2 id="danhsach">Danh Sách Chuyến Xe</h2></a>
+     
+    <div class="row" style="margin: 10px;">
+        <c:forEach var="ks" items="${chuyenxe}">
+        <div class="card col-md-3" style="width:400px;">
+                <img class="card-img-top rounded" src="${ks.hinhanh}"/>
+              <div class="card-body">
+                <h4 class="card-title">${ks.tenCX}</h4>
+                <p class="card-text"><b>Điểm đi: </b>${ks.diemdi}</p>
+                <p class="card-text"><b>Điểm đến: </b>${ks.diemden}</p>
+                <a href="<c:url value="/chuyenxe/detail/${q.idCX}"/>" class="btn btn-primary stretched-link">Xem Chi Tiết</a>
+              </div>
+        </div>
+       </c:forEach>      
+       
+    </div>
+</div>
     <div class="col-md-20" >
         <br>
-        <h2>Danh Sách Khách Sạn</h2>
+        <a href="<c:url value="/khachsan"/>" ><h2 id="danhsach">Danh Sách Khách Sạn</h2></a>
      
     <div class="row" style="margin: 10px;">
         <c:forEach var="ks" items="${khachsan}">
@@ -63,7 +81,7 @@
 </div>
     <div class="col-md-20">
         <br>
-        <h2>Danh Sách Tour</h2>
+       <a href="<c:url value="/tour"/>" ><h2 id="danhsach">Danh Sách Tour</h2></a>
     <div class="row" style="margin: 10px;">
         <c:forEach var="t" items="${tour}">
         <div class="card col-md-3" style="width:400px;">

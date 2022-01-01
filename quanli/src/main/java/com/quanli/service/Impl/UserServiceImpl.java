@@ -94,6 +94,7 @@ public class UserServiceImpl implements  UserService{
             String img = (String) r.get("secure_url");
             System.err.println(img);
             user.setHinhanh(img);
+            user.setUserRole(user.USER);
             String pass = user.getPassword();
         user.setPassword(this.passwordEncoder.encode(pass));
        userRepository.updateUser(user);

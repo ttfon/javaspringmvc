@@ -13,7 +13,7 @@ public class Execute {
 
     OkHttpClient client = new OkHttpClient();
     
-    public static String chuoi= "";
+    
     public HttpResponse sendToMoMo(String endpoint, String payload) {
 
         try {
@@ -26,7 +26,7 @@ public class Execute {
 
             Response result = client.newCall(request).execute();
             HttpResponse response = new HttpResponse(result.code(), result.body().string(), result.headers());
-            chuoi = response.toString();
+            
             LogUtils.info("[HttpResponseFromMoMo] " + response.toString());
 
             return response;

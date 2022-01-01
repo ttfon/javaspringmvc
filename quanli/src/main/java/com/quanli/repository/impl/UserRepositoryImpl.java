@@ -86,7 +86,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public void updateUserwAvatar(User user) {
          Session s = sessionFactory.getObject().getCurrentSession();
-         user.setUserRole(user.USER);
+         
          s.update(user);
     }
 

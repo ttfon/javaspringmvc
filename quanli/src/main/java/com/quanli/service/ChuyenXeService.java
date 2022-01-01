@@ -21,4 +21,5 @@ public interface ChuyenXeService {
     List<ChuyenXe> getChuyenXediByTP(int tp);
     ChuyenXe getChuyenXeById(int id);
     void updateCX(ChuyenXe chuyenxe);
+    List<ChuyenXe> getKSTop4(int page);
 }

@@ -82,7 +82,10 @@
     text-decoration: none;
     color: white;
 }
-
+#danhsach{
+    color:black;
+    text-decoration: none;
+}
 
         </style>
     </head>

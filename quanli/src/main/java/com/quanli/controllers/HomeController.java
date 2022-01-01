@@ -8,6 +8,7 @@ package com.quanli.controllers;
 
 
 import com.quanli.repository.LoaiPhongRepository;
+import com.quanli.service.ChuyenXeService;
 import com.quanli.service.KhachSanService;
 import com.quanli.service.PhongService;
 import com.quanli.service.ThanhPhoService;
@@ -42,11 +43,14 @@ public class HomeController {
    private ThanhPhoService thanhPhoService;
    @Autowired
    private TourService tourService;
+   @Autowired
+   private ChuyenXeService chuyenXeService;
     @RequestMapping("/")
     public String index(Model model)
     {
        model.addAttribute("khachsan", this.khachSanService.getKSTop8(1));
        model.addAttribute("tour", this.tourService.getKSTop8(1));
+       model.addAttribute("chuyenxe",this.chuyenXeService.getKSTop4(1));
         return "index";
     }
     

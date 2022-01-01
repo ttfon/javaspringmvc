@@ -74,5 +74,15 @@ public class ChuyenXeRepositoryImpl implements ChuyenXeRepository{
          Session session = this.sessionFactoryBean.getObject().getCurrentSession();
          session.update(cx);
     }
+
+    @Override
+    public List<ChuyenXe> getKSTop4(int page) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Query q = session.createQuery("From ChuyenXe ");
+        int max = 4;
+         q.setMaxResults(max);
+        q.setFirstResult((page-1) * max);
+        return q.getResultList();
+    }
     
 }

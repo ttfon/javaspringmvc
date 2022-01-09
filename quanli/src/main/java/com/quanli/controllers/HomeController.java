@@ -7,6 +7,7 @@ package com.quanli.controllers;
 
 
 
+import com.quanli.pojos.User;
 import com.quanli.repository.LoaiPhongRepository;
 import com.quanli.service.ChuyenXeService;
 import com.quanli.service.KhachSanService;
@@ -99,5 +100,6 @@ public class HomeController {
     {
         return "/khachsan";
     }
+    
     
 }

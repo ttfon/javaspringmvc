@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: chuyenxetest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.54 s <<< FAILURE! - in chuyenxetest
+testgetchuyenxeById  Time elapsed: 0.008 s  <<< ERROR!
+java.lang.NullPointerException
+	at chuyenxetest.testgetchuyenxeById(chuyenxetest.java:68)
+

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>Trang chu</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="width: 100%;height:10%">
+  <div class="container-fluid">
+    <a class="nav-link" href="<c:url value="/"/>" style="color: white;">Trang chủ</a>
+    <a class="nav-link" href="<c:url value="/chuyenxe"/>" style="color: white;">Xe Khách</a>
+    <form class="form-inline" action="">
+      <input class="form-control mr-sm-2" type="text" name="name" placeholder="Tìm kiếm">
+      <button class="btn btn-success" type="submit">Tìm</button>
+    </form><br>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarReponsive">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarReponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <c:if test="${pageContext.request.userPrincipal.name==null}">
+          <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/login"/>">Đăng Nhập</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/register"/>">Đăng Ký</a>
+          </li>
+        </c:if>
+        <c:if test="${pageContext.request.userPrincipal.name!=null}">
+          <li class="nav-item dropdown dropleft">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">${pageContext.request.userPrincipal.name}</a>
+
+            <div class="dropdown-menu">
+              <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <a class="dropdown-item" href=" <c:url value="/admin/thongke"/>">Quản lí</a>
+              </sec:authorize>
+              <sec:authorize access="hasRole('ROLE_NV')">
+                <a class="dropdown-item" href=" <c:url value="/nhanvien/index"/>">Nhân Viên</a>
+              </sec:authorize>
+              <sec:authorize access="hasRole('ROLE_TX')">
+                <a class="dropdown-item" href=" <c:url value="/taixe/info/${currentUser.id}"/>">Tài Xế</a>
+              </sec:authorize>
+              <a class="dropdown-item" href=" <c:url value="/profile/${pageContext.request.userPrincipal.name}"/>">Thông tin</a>
+              <a class="dropdown-item" href="<c:url value="/logout"/>">Logout</a>
+            </div>
+          </li>
+
+        </c:if>
+      </ul>
+    </div>
+  </div>
+</nav>
+<ul class="carousel-indicators">
+  <li data-target="#demo" data-slide-to="0" class="active"></li>
+  <li data-target="#demo" data-slide-to="1"></li>
+  <li data-target="#demo" data-slide-to="2"></li>
+</ul>
+
+<!-- The slideshow -->
+<div class="carousel-inner" style="width: 100%;height: 800px;">
+  <div class="carousel-item active">
+    <img class="img-fluid" style="width: 100%;height: 800px;"src="https://vn.blog.kkday.com/wp-content/uploads/blogcover-1.jpg" alt="quanliluhanh">
+  </div>
+  <div class="carousel-item">
+    <img class="img-fluid" style="width: 100%;height: 800px;"src="https://transviet.com.vn/images/Khuyen-Mai/Pictures/cam_nang_du_lich/LUU-Y-KHI-DI-DU-LICH/dulichtheotour-transviet00.jpg" alt="quanliluhanh">
+  </div>
+  <div class="carousel-item">
+    <img class="img-fluid" style="width: 100%;height: 800px;"src="https://media.baodautu.vn/Images/duyhuu/2018/09/19/viet-nam-to-chuc-dien-dan-du-lich-cap-cao1537329493.jpg" alt="quanliluhanh">
+  </div>
+</div>
+
+<!-- Left and right controls -->
+<a class="carousel-control-prev" href="#demo" data-slide="prev">
+  <span class="carousel-control-prev-icon"></span>
+</a>
+<a class="carousel-control-next" href="#demo" data-slide="next">
+  <span class="carousel-control-next-icon"></span>
+</a>
+</div>
+<div class="container">
+  <div class="col-md-20" >
+    <br>
+    <a href="<c:url value="/chuyenxe"/>" ><h2 id="danhsach">Danh Sách Chuyến Xe</h2></a>
+
+    <div class="row" style="margin: 10px;">
+      <c:forEach var="ks" items="${chuyenxe}">
+        <div class="card col-md-3" style="width:400px;">
+          <img class="card-img-top rounded" src="${ks.hinhanh}"/>
+          <div class="card-body">
+            <h4 class="card-title">${ks.tenCX}</h4>
+            <p class="card-text"><b>Điểm đi: </b>${ks.diemdi}</p>
+            <p class="card-text"><b>Điểm đến: </b>${ks.diemden}</p>
+            <a href="<c:url value="/chuyenxe/detail/${q.idCX}"/>" class="btn btn-primary stretched-link">Xem Chi Tiết</a>
+          </div>
+        </div>
+      </c:forEach>
+
+    </div>
+  </div>
+  <div class="col-md-20" >
+    <br>
+    <a href="<c:url value="/khachsan"/>" ><h2 id="danhsach">Danh Sách Khách Sạn</h2></a>
+
+    <div class="row" style="margin: 10px;">
+      <c:forEach var="ks" items="${khachsan}">
+        <div class="card col-md-3" style="width:400px;">
+          <img class="card-img-top rounded" src="${ks.hinhanh}"/>
+          <div class="card-body">
+            <h4 class="card-title">${ks.tenKS}</h4>
+            <p class="card-text"><b>Địa chỉ: </b>${ks.diachi}</p>
+            <p class="card-text"><b>Thành Phố: </b>${ks.thanhPho}</p>
+            <a href="<c:url value="/khachsan/detail/${ks.idkhachsan}"/>" class="btn btn-primary stretched-link">Xem Chi Tiết</a>
+          </div>
+        </div>
+      </c:forEach>
+
+    </div>
+  </div>
+  <div class="col-md-20">
+    <br>
+    <a href="<c:url value="/tour"/>" ><h2 id="danhsach">Danh Sách Tour</h2></a>
+    <div class="row" style="margin: 10px;">
+      <c:forEach var="t" items="${tour}">
+        <div class="card col-md-3" style="width:400px;">
+          <img class="card-img-top rounded" src="${t.image}"/>
+          <div class="card-body">
+            <h4 class="card-title">${t.nametour}</h4>
+            <p class="card-text"><b>Thành Phố: </b>${t.place}</p>
+            <b>Giá: </b><p class="text-danger"><fmt:formatNumber type="number" maxFractionDigits="3" value="${t.price}"/> VND</p>
+            <a href="<c:url value="/tour/detail/${t.idtour}"/>" class="btn btn-primary stretched-link">Xem Chi Tiết</a>
+          </div>
+        </div>
+      </c:forEach>
+    </div>
+  </div>
+</div>
+</body>
+</html>

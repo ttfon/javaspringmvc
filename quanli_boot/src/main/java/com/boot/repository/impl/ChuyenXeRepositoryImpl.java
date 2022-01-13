@@ -23,8 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class ChuyenXeRepositoryImpl implements ChuyenXeRepository {
-    @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+//    @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
     @Override
     public void addCX(ChuyenXe chuyenxe) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();

@@ -25,8 +25,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CTDonPhongRepositoryImpl implements CTDonPhongRepository {
 
-     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+//     @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+
     @Override
     public List<CTDonPhong> getCTDonPhong() {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();

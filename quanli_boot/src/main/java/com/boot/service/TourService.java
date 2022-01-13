@@ -14,11 +14,11 @@ import java.util.List;
  * @author AD
  */
 public interface TourService {
-     List<Tour>showtour();
+      List<Tour>showtour();
       Tour getTourById(int id);
       void addtour(Tour tour);
       void delete(int id);
       void update(Tour tour);
       List<Tour> getTourByTP(String LP);
-        List<Tour> getKSTop8(int page);
+      List<Tour> getKSTop8(int page);
 }

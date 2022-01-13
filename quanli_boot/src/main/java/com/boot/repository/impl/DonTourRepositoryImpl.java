@@ -39,8 +39,12 @@ public class DonTourRepositoryImpl implements DonTourRepository {
     private UserRepository userRepository;
       @Autowired
       private ChuyenXeRepository chuyenXeRepository;
-     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+
+//     @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+
     @Override
     public List<DonTour> getDoanhThu() {
        Session session = this.sessionFactoryBean.getObject().getCurrentSession();

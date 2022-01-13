@@ -25,8 +25,10 @@ public class KhachSanServiceImpl implements KhachSanService {
 
     @Autowired
     private KhachSanRepository khachSanRepository;
-    @Autowired
-    private Cloudinary cloudinary;
+//    @Autowired
+//    private Cloudinary cloudinary;
+
+
     @Override
     public List<KhachSan> getKS() {
         return this.khachSanRepository.getKS();
@@ -34,17 +36,9 @@ public class KhachSanServiceImpl implements KhachSanService {
 
     @Override
     public void addPhong(KhachSan ks) {
-         try{
-          Map r = cloudinary.uploader().upload(ks.getFile().getBytes(),
-                ObjectUtils.asMap("resource_type","auto"));
-            String img = (String) r.get("secure_url");
-            System.err.println(img);
-            ks.setHinhanh(img);
-            this.khachSanRepository.addPhong(ks);
-            }catch(IOException ex)
-        {
-            System.err.println("loi:" + ex.getMessage());
-        }
+
+        ks.setHinhanh("https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/10019967-b5d421db7e4736d3a7d390a50f854215.jpeg?tr=q-40,w-740,h-465&_src=imagekit");
+        this.khachSanRepository.addPhong(ks);
     }
 
     @Override

@@ -23,23 +23,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChuyenXeServiceImpl implements ChuyenXeService {
 
-    @Autowired
-    private Cloudinary cloudinary;
+//    @Autowired
+//    private Cloudinary cloudinary;
     @Autowired
     private ChuyenXeRepository chuyenXeRepository;
     @Override
     public void addCX(ChuyenXe chuyenxe) {
-         try{
-          Map r = cloudinary.uploader().upload(chuyenxe.getFile().getBytes(),
-                ObjectUtils.asMap("resource_type","auto"));
-            String img = (String) r.get("secure_url");
-            System.err.println(img);
-            chuyenxe.setHinhanh(img);
-            this.chuyenXeRepository.addCX(chuyenxe);
-            }catch(IOException ex)
-        {
-            System.err.println("loi:" + ex.getMessage());
-        }
+        //          Map r = cloudinary.uploader().upload(chuyenxe.getFile().getBytes(),
+//                ObjectUtils.asMap("resource_type","auto"));
+//            String img = (String) r.get("secure_url");
+//            System.err.println(img);
+        chuyenxe.setHinhanh("https://tintucxeco.net/wp-content/uploads/2019/05/xe-khach-thai-minh.jpg");
+        this.chuyenXeRepository.addCX(chuyenxe);
     }
 
     @Override

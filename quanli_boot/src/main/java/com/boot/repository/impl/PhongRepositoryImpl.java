@@ -23,8 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class PhongRepositoryImpl implements PhongRepository {
-    @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+//    @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
     @Override
     public List<Phong> getPhong() {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();

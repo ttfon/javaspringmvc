@@ -24,8 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class LoaiPhongRepositoryImpl implements LoaiPhongRepository {
 
-     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+//     @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
     @Override
     public List<LoaiPhong> getLP() {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();

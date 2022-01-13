@@ -25,8 +25,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ThanhPhoRepositoryImpl implements ThanhPhoRepository {
 
-    @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+//    @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+
     @Override
     public List<ThanhPho> getAllTP() {
         Session session = sessionFactoryBean.getObject().getCurrentSession();

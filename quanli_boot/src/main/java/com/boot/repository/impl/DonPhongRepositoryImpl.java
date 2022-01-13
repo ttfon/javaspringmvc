@@ -27,8 +27,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DonPhongRepositoryImpl implements DonPhongRepository {
 
-     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+//     @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 
     @Override
     public List<DonPhong> getDonPhong() {

@@ -27,8 +27,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class KhachSanRepositoryImpl implements KhachSanRepository {
-    @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+//    @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
     @Override
     public List<KhachSan> getKS() {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();

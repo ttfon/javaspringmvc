@@ -23,8 +23,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CTDTRepositoryImpl implements CTDTRepository {
 
-     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+//     @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+
     @Override
     public List<CTDonTour> getCTByIdDP(int id) {
       Session session = this.sessionFactoryBean.getObject().getCurrentSession();

@@ -23,8 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TourServiceImpl implements TourService {
 
-    @Autowired
-    private Cloudinary cloudinary;
+
     @Autowired
     private TourRepository tourRepository;
     @Override
@@ -39,17 +38,9 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public void addtour(Tour tour) {
-        try{
-          Map r = cloudinary.uploader().upload(tour.getFile().getBytes(),
-                ObjectUtils.asMap("resource_type","auto"));
-            String img = (String) r.get("secure_url");
-            System.err.println(img);
-            tour.setImage(img);
-            this.tourRepository.addtour(tour);
-            }catch(IOException ex)
-        {
-            System.err.println("loi:" + ex.getMessage());
-        }
+
+        tour.setImage("https://www.dualshockers.com/static/uploads/2021/11/Powder-in-Arcane-Music-Video-1140x570.jpg");
+        this.tourRepository.addtour(tour);
     }
 
     @Override
@@ -59,17 +50,9 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public void update(Tour tour) {
-        try{
-          Map r = cloudinary.uploader().upload(tour.getFile().getBytes(),
-                ObjectUtils.asMap("resource_type","auto"));
-            String img = (String) r.get("secure_url");
-            System.err.println(img);
-            tour.setImage(img);
-            this.tourRepository.update(tour);
-            }catch(IOException ex)
-        {
-            System.err.println("loi:" + ex.getMessage());
-        }
+
+        tour.setImage("https://www.dualshockers.com/static/uploads/2021/11/Powder-in-Arcane-Music-Video-1140x570.jpg");
+        this.tourRepository.update(tour);
     }
 
     @Override

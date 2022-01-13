@@ -24,8 +24,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DanhGiaRepositoryImpl implements DanhGiaRepository {
 
-    @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+//    @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean;
+
+    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+
     @Override
     public void addDG(DanhGia dg) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();

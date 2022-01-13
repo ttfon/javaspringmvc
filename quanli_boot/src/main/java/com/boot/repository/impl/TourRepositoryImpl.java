@@ -11,24 +11,30 @@ import javax.persistence.Query;
 import com.boot.pojos.Tour;
 import com.boot.repository.TourRepository;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author AD
  */
-@Controller
+@Repository
 @Transactional
 public class TourRepositoryImpl implements TourRepository {
 
+//    @Autowired
+//    private LocalSessionFactoryBean sessionFactoryBean ;
+
     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+    private SessionFactory sessionFactory;
+
+//    private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
     @Override
     public List<Tour> showtour() {
-         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+         Session session = this.sessionFactory.getCurrentSession();
           Query q = session.createQuery("From Tour ");
         
         return q.getResultList();
@@ -36,33 +42,33 @@ public class TourRepositoryImpl implements TourRepository {
 
     @Override
     public Tour getTourById(int i) {
-          Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+          Session session = this.sessionFactory.getCurrentSession();
       Tour ks = session.get(Tour.class, i);
       return ks;
     }
 
     @Override
     public void addtour(Tour tour) {
-          Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+          Session session = this.sessionFactory.getCurrentSession();
           session.save(tour);
     }
 
     @Override
     public void delete(int i) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
         Tour tour = session.get(Tour.class, i);
         session.delete(tour);
     }
 
     @Override
     public void update(Tour tour) {
-       Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+       Session session = this.sessionFactory.getCurrentSession();
        session.update(tour);
     }
 
     @Override
     public List<Tour> getTourByTP(String LP) {
-       Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+       Session session = this.sessionFactory.getCurrentSession();
         Query q =session.createQuery("From Tour t Where t.place like CONCAT('%', :lp, '%')");
           q.setParameter("lp", LP);
           return q.getResultList();
@@ -70,7 +76,7 @@ public class TourRepositoryImpl implements TourRepository {
 
     @Override
     public List<Tour> getKSTop8(int page) {
-         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+         Session session = this.sessionFactory.getCurrentSession();
         Query q = session.createQuery("From Tour ");
         int max = 8;
          q.setMaxResults(max);

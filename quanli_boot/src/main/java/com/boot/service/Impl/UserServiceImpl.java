@@ -31,10 +31,14 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-    @Autowired
-    private Cloudinary cloudinary;
+//    @Autowired
+//    private BCryptPasswordEncoder passwordEncoder;
+
+    private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+//    @Autowired
+//    private Cloudinary cloudinary;
+
     @Override
     public List<User> getUsers(String username) {
        return this.userRepository.getUsers(username);
@@ -88,20 +92,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserwAvatar(User user) {
-         try{
-          Map r = cloudinary.uploader().upload(user.getFile().getBytes(),
-                ObjectUtils.asMap("resource_type","auto"));
-            String img = (String) r.get("secure_url");
-            System.err.println(img);
-            user.setHinhanh(img);
-            user.setUserRole(user.USER);
-            String pass = user.getPassword();
+        //          Map r = cloudinary.uploader().upload(user.getFile().getBytes(),
+//                ObjectUtils.asMap("resource_type","auto"));
+//            String img = (String) r.get("secure_url");
+//            System.err.println(img);
+        user.setHinhanh("https://res.cloudinary.com/ttfon1432/image/upload/v1632296774/zniysinxqefnaenrv8cb.png");
+        user.setUserRole(user.USER);
+        String pass = user.getPassword();
         user.setPassword(this.passwordEncoder.encode(pass));
-       userRepository.updateUser(user);
-         }catch(IOException ex)
-        {
-            System.err.println("loi:" + ex.getMessage());
-        }
+        userRepository.updateUser(user);
     }
 
     @Override

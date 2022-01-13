@@ -1,6 +1,8 @@
 package com.boot.controller;
 
+import com.boot.pojos.ChuyenXe;
 import com.boot.pojos.Tour;
+import com.boot.service.ChuyenXeService;
 import com.boot.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,17 @@ public class index {
     @Autowired
     private TourService tourService;
 
+    @Autowired
+    private ChuyenXeService chuyenXeService;
+
     @RequestMapping("/")
     public String test() {
         List<Tour> list = this.tourService.showtour();
-        return list.get(0).getIdtour()+ " - " + list.get(0).getNametour();
+        List<ChuyenXe> list1 = this.chuyenXeService.getKS();
+
+//        return list.get(0).getIdtour()+ " - " + list.get(0).getNametour();
+
+        return list1.get(0).getIdCX()+ " - " + list1.get(0).getTenCX();
+
     }
 }

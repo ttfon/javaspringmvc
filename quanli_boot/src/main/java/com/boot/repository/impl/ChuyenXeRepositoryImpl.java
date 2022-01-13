@@ -85,7 +85,7 @@ public class ChuyenXeRepositoryImpl implements ChuyenXeRepository {
         Session session = this.sessionFactory.getCurrentSession();
         Query q = session.createQuery("From ChuyenXe ");
         int max = 4;
-         q.setMaxResults(max);
+        q.setMaxResults(max);
         q.setFirstResult((page-1) * max);
         return q.getResultList();
     }

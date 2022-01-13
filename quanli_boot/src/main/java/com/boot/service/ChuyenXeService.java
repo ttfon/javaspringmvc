@@ -14,11 +14,11 @@ import java.util.List;
  * @author AD
  */
 public interface ChuyenXeService {
-     void addCX(ChuyenXe chuyenxe);
-     List<ChuyenXe> getKS();
+    void addCX(ChuyenXe chuyenxe);
+    List<ChuyenXe> getCX();
     void deleteCX(int id);
     List<ChuyenXe> getChuyenXeByTP(String tp);
-    List<ChuyenXe> getChuyenXediByTP(int tp);
+    List<ChuyenXe> getChuyenXediByTP(int tp); //khong xai
     ChuyenXe getChuyenXeById(int id);
     void updateCX(ChuyenXe chuyenxe);
     List<ChuyenXe> getKSTop4(int page);

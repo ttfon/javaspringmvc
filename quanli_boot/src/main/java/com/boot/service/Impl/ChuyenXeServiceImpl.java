@@ -38,7 +38,7 @@ public class ChuyenXeServiceImpl implements ChuyenXeService {
     }
 
     @Override
-    public List<ChuyenXe> getKS() {
+    public List<ChuyenXe> getCX() {
         return this.chuyenXeRepository.getKS();
     }
 

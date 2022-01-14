@@ -1,8 +1,10 @@
 package com.boot.controller;
 
 import com.boot.pojos.ChuyenXe;
+import com.boot.pojos.KhachSan;
 import com.boot.pojos.Tour;
 import com.boot.service.ChuyenXeService;
+import com.boot.service.KhachSanService;
 import com.boot.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,14 +22,17 @@ public class index {
     @Autowired
     private ChuyenXeService chuyenXeService;
 
+    @Autowired
+    private KhachSanService khachSanService;
     @RequestMapping("/")
     public String test() {
         List<Tour> list = this.tourService.showtour();
-        List<ChuyenXe> list1 = this.chuyenXeService.getCX();
-
+        List<ChuyenXe> list1 = this.chuyenXeService.getKS();
+        ChuyenXe cx = this.chuyenXeService.getChuyenXeById(1);
 //        return list.get(0).getIdtour()+ " - " + list.get(0).getNametour();
 
-        return list1.get(0).getIdCX()+ " - " + list1.get(0).getTenCX();
+        return cx.getTenCX();
+        // return list1.get(0).getIdCX()+ " - " + list1.get(0).getTenCX();
 
     }
 }

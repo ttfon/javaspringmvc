@@ -24,6 +24,10 @@ public class DonTourServiceImpl implements DonTourService {
 
     @Autowired
     private DonTourRepository donTourRepository;
+
+    public DonTourServiceImpl(DonTourRepository donTourRepository) {
+    }
+
     @Override
     public List<DonTour> getDoanhThu() {
        return this.donTourRepository.getDoanhThu();

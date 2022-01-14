@@ -2,24 +2,38 @@ package com.boot.quanli_boot;
 
 import com.boot.pojos.ChuyenXe;
 import com.boot.service.ChuyenXeService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ChuyenXeTest {
 
     @Autowired
     private ChuyenXeService chuyenXeService;
 
-    static int idChuyenXe = 14;
+    int idChuyenXe = 14;
 
-    static String tenChuyenXe = "Ong noi";
+    int soLuongChuyenXeTrongDB = 7;
+
+    String tenChuyenXe = "Ong noi";
+
+    @Before
+    void start() {
+        List<ChuyenXe> list = this.chuyenXeService.getCX();
+
+        idChuyenXe = list.get(list.size()-1).getIdCX(); // lay id cua chuyen xe moi nhat
+
+        soLuongChuyenXeTrongDB = list.size();
+    }
 
     @Test // addCX(ChuyenXe chuyenxe)
+    @Order(1)
     void testAddChuyenXe() {
 
         ChuyenXe cx = new ChuyenXe();
@@ -28,13 +42,20 @@ public class ChuyenXeTest {
 
         this.chuyenXeService.addCX(cx);
 
+        List<ChuyenXe> list = this.chuyenXeService.getCX();
+
+        idChuyenXe = list.get(list.size()-1).getIdCX(); // lay id cua chuyen xe moi nhat
+
         Assertions.assertEquals(tenChuyenXe,this.chuyenXeService.getChuyenXeById(idChuyenXe).getTenCX());
 
     }
 
     @Test // getCX()
+    @Order(2)
     void testLayNhieuChuyenXe() {
-        int soLuongChuyenXeTrongDB = 7;
+        List<ChuyenXe> list = this.chuyenXeService.getCX();
+
+        soLuongChuyenXeTrongDB = list.size();
 
         int soLuongChuyenXe = this.chuyenXeService.getCX().size();
 
@@ -43,14 +64,25 @@ public class ChuyenXeTest {
     }
 
     @Test //getChuyenXeById(int id)
+    @Order(3)
     void testLayMotChuyenXe() {
-        ChuyenXe cx = this.chuyenXeService.getChuyenXeById(idChuyenXe);
+
+        int idChuyenXeDauTien = 1;
+
+        tenChuyenXe = "14C32323";
+
+        ChuyenXe cx = this.chuyenXeService.getChuyenXeById(idChuyenXeDauTien);
 
         Assertions.assertEquals(tenChuyenXe,cx.getTenCX());
     }
 
     @Test // updateCX(ChuyenXe chuyenxe)
+    @Order(4)
     void testCapNhatChuyenXe() {
+        List<ChuyenXe> list = this.chuyenXeService.getCX();
+
+        idChuyenXe = list.get(list.size()-1).getIdCX(); // lay id cua chuyen xe moi nhat
+
         ChuyenXe cx = this.chuyenXeService.getChuyenXeById(idChuyenXe);
 
         String tenSauKhiCapNhat = "Ong noi !!!!!!!!!!";
@@ -65,13 +97,20 @@ public class ChuyenXeTest {
     }
 
     @Test // deleteCX(int id)
+    @Order(5)
     void testXoaChuyenXe() {
+
+        List<ChuyenXe> list = this.chuyenXeService.getCX();
+
+        idChuyenXe = list.get(list.size()-1).getIdCX(); // lay id cua chuyen xe moi nhat
+
         this.chuyenXeService.deleteCX(idChuyenXe);
 
         Assertions.assertNull(this.chuyenXeService.getChuyenXeById(idChuyenXe));
     }
 
     @Test // getChuyenXeByTP(String tp)
+    @Order(6)
     void testLayChuyenXeBangTP() {
         String tp = "Đà Nẵng";
 
@@ -83,6 +122,7 @@ public class ChuyenXeTest {
     }
 
     @Test // getKSTop4(int page)
+    @Order(7)
     void testLayBonChuyenXeDau() {
         int[] id = {1, 7, 8, 9};
 

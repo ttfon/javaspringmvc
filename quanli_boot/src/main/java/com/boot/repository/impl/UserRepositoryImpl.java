@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 import com.boot.pojos.User;
 import com.boot.repository.UserRepository;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -29,7 +30,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserRepositoryImpl implements UserRepository {
 //     @Autowired
 //    private LocalSessionFactoryBean sessionFactory;
-
+    @Autowired
+    private SessionFactory sessionFactory1;
     private static LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
      
     @Override
@@ -66,8 +68,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUserById(int id) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-       User user = (User)session.get(User.class, id);
+        Session session = this.sessionFactory1.getCurrentSession();
+        User user = (User)session.get(User.class, id);
        return user;
     }
 

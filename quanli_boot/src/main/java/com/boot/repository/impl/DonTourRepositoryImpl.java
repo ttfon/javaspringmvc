@@ -21,6 +21,7 @@ import com.boot.repository.UserRepository;
 import com.boot.utils.utils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -42,12 +43,14 @@ public class DonTourRepositoryImpl implements DonTourRepository {
 
 //     @Autowired
 //    private LocalSessionFactoryBean sessionFactoryBean;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     private static LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 
     @Override
     public List<DonTour> getDoanhThu() {
-       Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
        String query = "select dp.ngaytao, sum(dp.tongtien) from DonTour as dp group by dp.ngaytao";
               
         Query q = session.createQuery(query);
@@ -56,8 +59,8 @@ public class DonTourRepositoryImpl implements DonTourRepository {
 
     @Override
     public List<DonTour> getLishSuById(int id) {
-         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
-         String query = "From CTDonTour dp where dp.dontour.user.id =:id";
+        Session session = this.sessionFactory.getCurrentSession();
+        String query = "From CTDonTour dp where dp.dontour.user.id =:id";
          Query q = session.createQuery(query);
          q.setParameter("id", id);
          return q.getResultList();
@@ -65,33 +68,36 @@ public class DonTourRepositoryImpl implements DonTourRepository {
 
     @Override
     public List<DonTour> getAllDonTour() {
-       Session session = this.sessionFactoryBean.getObject().getCurrentSession();
-         Query q = session.createQuery("From DonTour ");
+        Session session = this.sessionFactory.getCurrentSession();
+        Query q = session.createQuery("From DonTour ");
         return q.getResultList(); }
 
     @Override
-    public void xoa(int id) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
-      DonTour donphong = session.get(DonTour.class, id);
-      session.remove(donphong);}
+    public boolean xoa(int id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        DonTour donphong = session.get(DonTour.class, id);
+      session.remove(donphong);
+        return true;}
+
 
     @Override
     public DonTour getDTById(int id) {
-       Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
         DonTour donphong = session.get(DonTour.class, id);
         return donphong;
     }
 
     @Override
-    public void update(DonTour donphong) {
-       Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+    public boolean update(DonTour donphong) {
+        Session session = this.sessionFactory.getCurrentSession();
         session.update(donphong);
+        return true;
     }
 
     @Override
     public boolean addDonCX(Map<Integer, CartXe> cart, int id) {
         try{
-            Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+            Session session = this.sessionFactory.getCurrentSession();
             DonTour order = new DonTour();
             System.out.println("bat dau");
             order.setUser(this.userRepository.getUserById(id));
@@ -131,6 +137,12 @@ public class DonTourRepositoryImpl implements DonTourRepository {
         return q.getResultList();
     }
 
-   
-    
+    @Override
+    public boolean add(DonTour dt) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.save(dt);
+        return true;
+    }
+
+
 }

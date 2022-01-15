@@ -19,10 +19,11 @@ public interface DonTourService {
      List<DonTour> getDoanhThu();
       List<DonTour> getLishSuById(int id);
        List<DonTour> getAllDonTour();
-    void xoa(int  id);
+    boolean xoa(int  id);
     DonTour getDTById(int id);
-    void update(DonTour donphong);
+    boolean update(DonTour donphong);
     boolean addDonCX(Map<Integer, CartXe> cart, int id);
+    boolean add(DonTour dt);
     List<DonTour> getDoanhThuTheoThang(int thang);
    
 }

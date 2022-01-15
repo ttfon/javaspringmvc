@@ -44,8 +44,9 @@ public class DonTourServiceImpl implements DonTourService {
     }
 
     @Override
-    public void xoa(int id) {
+    public boolean xoa(int id) {
         this.donTourRepository.xoa(id);
+        return true;
     }
 
     @Override
@@ -54,8 +55,9 @@ public class DonTourServiceImpl implements DonTourService {
     }
 
     @Override
-    public void update(DonTour donphong) {
+    public boolean update(DonTour donphong) {
         this.donTourRepository.update(donphong);
+        return true;
     }
 
     @Override
@@ -64,6 +66,13 @@ public class DonTourServiceImpl implements DonTourService {
         return  this.donTourRepository.addDonCX(cart,id);
         else 
             return false;
+    }
+
+    @Override
+    public boolean add(DonTour dt) {
+        this.donTourRepository.add(dt);
+
+        return true;
     }
 
     @Override

@@ -16,9 +16,9 @@ import java.util.Map;
  * @author AD
  */
 public interface DonTourService {
-     List<DonTour> getDoanhThu();
-      List<DonTour> getLishSuById(int id);
-       List<DonTour> getAllDonTour();
+    List<DonTour> getDoanhThu();
+    List<DonTour> getLishSuById(int id);
+    List<DonTour> getAllDonTour();
     void xoa(int  id);
     DonTour getDTById(int id);
     void update(DonTour donphong);

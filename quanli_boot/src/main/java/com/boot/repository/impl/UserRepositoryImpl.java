@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 import com.boot.pojos.User;
 import com.boot.repository.UserRepository;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -30,11 +31,12 @@ public class UserRepositoryImpl implements UserRepository {
 //     @Autowired
 //    private LocalSessionFactoryBean sessionFactory;
 
-    private static LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+    @Autowired
+    private SessionFactory sessionFactory;
      
     @Override
     public List<User> getUsers(String username) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
           CriteriaBuilder builder = session.getCriteriaBuilder();
           CriteriaQuery<User> query= builder.createQuery(User.class);
           Root root = query.from(User.class);
@@ -49,52 +51,67 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void addUser(User user) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-       
-        session.save(user);
+    public boolean addUser(User user) {
+        Session session = this.sessionFactory.getCurrentSession();
+       try {
+           session.save(user);
+       } catch(Exception e){
+           return false;
+       }
+       return true;
     }
 
     
 
     @Override
-    public void delete(int id) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        User user = (User)session.get(User.class, id);
-        session.delete(user);
+    public boolean delete(int id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        try {
+            User user = (User)session.get(User.class, id);
+            session.delete(user);
+        } catch(Exception e){
+            return false;
+        }
+        return true;
+
     }
 
     @Override
     public User getUserById(int id) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
        User user = (User)session.get(User.class, id);
        return user;
     }
 
     @Override
     public List<User> getAllUser() {
-       Session s = sessionFactory.getObject().getCurrentSession();
+       Session s = sessionFactory.getCurrentSession();
        Query q = s.createQuery("From User");
        
        return q.getResultList();
     }
 
     @Override
-    public void updateUser(User user) {
-         Session s = sessionFactory.getObject().getCurrentSession();
-         s.update(user);
+    public boolean updateUser(User user) {
+         Session s = sessionFactory.getCurrentSession();
+         try {
+             s.update(user);
+         } catch(Exception e){
+             return false;
+         }
+         return true;
     }
 
     @Override
     public void updateUserwAvatar(User user) {
-         Session s = sessionFactory.getObject().getCurrentSession();
-         
+         Session s = sessionFactory.getCurrentSession();
+
          s.update(user);
     }
 
     @Override
     public List<User> getAllUserByName(String lp) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
           Query q =session.createQuery("From User u Where u.hoten like CONCAT('%', :lp, '%')");
           q.setParameter("lp", lp);
           return q.getResultList();
@@ -102,7 +119,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getAllUserByus(String name) {
-      Session session = this.sessionFactory.getObject().getCurrentSession();
+      Session session = this.sessionFactory.getCurrentSession();
           Query q =session.createQuery("From User u Where u.username like CONCAT('%', :lp, '%')");
           q.setParameter("lp", name);
           User u = (User) q.getResultList();
@@ -112,7 +129,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getAllUserTaiXe() {
-         Session session = this.sessionFactory.getObject().getCurrentSession();
+         Session session = this.sessionFactory.getCurrentSession();
          String name = "ROLE_TX";
            CriteriaBuilder builder = session.getCriteriaBuilder();
           CriteriaQuery<User> query= builder.createQuery(User.class);

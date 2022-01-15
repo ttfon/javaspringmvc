@@ -16,9 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface UserService extends UserDetailsService{
     List<User> getUsers(String username);
-    void addUser(User user);
-    void updateUser(User user);
-    void delete(int id);
+    boolean addUser(User user);
+    boolean updateUser(User user);
+    boolean delete(int id);
     User getUserById(int id);
     List<User> getAllUser();
     void updateUserwAvatar(User user);

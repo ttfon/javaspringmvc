@@ -15,11 +15,11 @@ import java.util.List;
  */
 public interface UserRepository {
     List<User> getUsers(String username);
-    void addUser(User user);
-    void delete(int id);
+    boolean addUser(User user);
+    boolean delete(int id);
     User getUserById(int id);
     List<User> getAllUser();  
-    void updateUser(User user);
+    boolean updateUser(User user);
     void updateUserwAvatar(User user);
     List<User> getAllUserByName(String name);
      User getAllUserByus(String name);

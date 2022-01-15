@@ -58,26 +58,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
        String pass = user.getPassword();
        user.setPassword(this.passwordEncoder.encode(pass));
        user.setUserRole(user.USER);
-       userRepository.addUser(user);
+       return userRepository.addUser(user);
     }
 
     @Override
-    public void updateUser(User user) {
+    public boolean updateUser(User user) {
         
         String pass = user.getPassword();
        user.setPassword(this.passwordEncoder.encode(pass));
        
        
-       userRepository.updateUser(user);
+       return userRepository.updateUser(user);
     }
 
     @Override
-    public void delete(int i) {
-        this.userRepository.delete(i);
+    public boolean delete(int i) {
+        return userRepository.delete(i);
     }
 
     @Override

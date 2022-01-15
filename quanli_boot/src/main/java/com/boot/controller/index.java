@@ -27,7 +27,7 @@ public class index {
     @RequestMapping("/")
     public String test() {
         List<Tour> list = this.tourService.showtour();
-        List<ChuyenXe> list1 = this.chuyenXeService.getKS();
+        List<ChuyenXe> list1 = this.chuyenXeService.getCX();
         ChuyenXe cx = this.chuyenXeService.getChuyenXeById(1);
 //        return list.get(0).getIdtour()+ " - " + list.get(0).getNametour();
 

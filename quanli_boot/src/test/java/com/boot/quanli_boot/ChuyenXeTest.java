@@ -30,6 +30,8 @@ public class ChuyenXeTest {
         idChuyenXe = list.get(list.size()-1).getIdCX(); // lay id cua chuyen xe moi nhat
 
         soLuongChuyenXeTrongDB = list.size();
+
+        System.err.println("Start");
     }
 
     @Test // addCX(ChuyenXe chuyenxe)
@@ -57,7 +59,11 @@ public class ChuyenXeTest {
 
         soLuongChuyenXeTrongDB = list.size();
 
-        int soLuongChuyenXe = this.chuyenXeService.getCX().size();
+        // hien tai dang lay so luong trong DB
+
+        int soLuongChuyenXe = list.size();
+
+//        soLuongChuyenXe = 7; // <<<< muon custom so luong expect thi uncomment
 
         Assertions.assertEquals(soLuongChuyenXeTrongDB,soLuongChuyenXe);
 

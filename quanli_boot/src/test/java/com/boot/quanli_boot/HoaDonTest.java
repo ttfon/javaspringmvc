@@ -5,6 +5,7 @@ import com.boot.pojos.User;
 import com.boot.repository.DonTourRepository;
 import com.boot.service.DonTourService;
 import com.boot.service.Impl.DonTourServiceImpl;
+import com.boot.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
@@ -20,10 +22,10 @@ import java.util.*;
 @SpringBootTest
 public class HoaDonTest {
 
-    @Mock
+    @Autowired
     private DonTourService donTourService;
-    @InjectMocks
-    private DonTourServiceImpl donTourServiceImpl;
+    @Autowired
+    private UserService userService;
 
     /*@BeforeAll
     List<DonTour> setup(List<DonTour>  list)
@@ -42,7 +44,7 @@ public class HoaDonTest {
         return list;
     }*/
 
-    @Test
+    /*@Test
     void testGetAllDonTourValid()
     {
         int expect = 6;
@@ -172,7 +174,63 @@ public class HoaDonTest {
         List<DonTour> actual = this.donTourService.getLishSuById(1);
         Assertions.assertNotEquals(expect,actual.size());
 
+    }*/
+    @Test
+    void getAllValid()
+    {
+        List<DonTour> list = donTourService.getAllDonTour();
+        int actual = list.size() ;
+        Assertions.assertEquals(11,actual);
     }
+    @Test
+    void getAllInValid()
+    {
+        List<DonTour> list = donTourService.getAllDonTour();
+        int actual = list.size() ;
+        Assertions.assertNotEquals(1,actual);
+    }
+    @Test
+    void getLishSuByIdValid()
+    {
+        List<DonTour> list = donTourService.getLishSuById(19);
+        int actual = list.size();
+        Assertions.assertEquals(3,actual);
 
+    }
+    @Test
+    void getLishSuByIdInValid()
+    {
+        List<DonTour> list = donTourService.getLishSuById(19);
+        int actual = list.size();
+        Assertions.assertNotEquals(10,actual);
+
+    }
+    @Test
+    void addHD()
+    {
+        DonTour dt = new DonTour();
+        dt.setUser(this.userService.getUserById(19));
+        dt.setNgaytao(new Date());
+        dt.setTongtien(100000);
+        dt.setPhuongthuc("offline");
+        dt.setTinhtrang("da thanh toan");
+
+        Assertions.assertTrue(this.donTourService.add(dt));
+    }
+    @Test
+    void update()
+    {
+        List<DonTour> list = donTourService.getAllDonTour();
+        DonTour dt = this.donTourService.getDTById(list.get(0).getId());
+        dt.setTongtien(200000);
+
+        Assertions.assertTrue(this.donTourService.update(dt));
+    }
+    @Test
+    void xoa()
+    {
+        List<DonTour> list = donTourService.getAllDonTour();
+        Assertions.assertTrue(this.donTourService.xoa(list.get(0).getId()));
+    }
 
 }

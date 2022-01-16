@@ -28,9 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class UserRepositoryImpl implements UserRepository {
-//     @Autowired
-//    private LocalSessionFactoryBean sessionFactory;
-
     @Autowired
     private SessionFactory sessionFactory;
      

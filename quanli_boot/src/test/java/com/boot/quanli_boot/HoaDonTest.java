@@ -180,7 +180,7 @@ public class HoaDonTest {
     {
         List<DonTour> list = donTourService.getAllDonTour();
         int actual = list.size() ;
-        Assertions.assertEquals(11,actual);
+        Assertions.assertEquals(13,actual);
     }
     @Test
     void getAllInValid()
@@ -194,7 +194,7 @@ public class HoaDonTest {
     {
         List<DonTour> list = donTourService.getLishSuById(19);
         int actual = list.size();
-        Assertions.assertEquals(3,actual);
+        Assertions.assertEquals(5,actual);
 
     }
     @Test
